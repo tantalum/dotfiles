@@ -11,7 +11,7 @@
 (setq-default cursor-in-non-selected-widows nil)
 
 ;; Use a bar for the cursor
-(setq-default cursor-type '(bar . 2))
+(setq-default cursor-type '(bar . 1))
 
 ;; Don't blink
 (blink-cursor-mode 0)
@@ -29,10 +29,14 @@
 (setq inhibit-startup-echo-area-message t)
 
 ;; Color Theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'tango t)
 
 ;; Auto indent
 (electric-indent-mode 1)
+
+;; Use system font
+(setq font-use-system-font t)
 
 ;; ------------------------------------------------------------------
 ;; Extensions
@@ -84,7 +88,7 @@
 (require 'scala-mode2)
 
 ;; ------------------------------------------------------------------------------
-;; EMC-Apps
+;; EMACS-Apps
 
 ;; org-mode
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
