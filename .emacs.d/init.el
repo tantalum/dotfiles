@@ -1,5 +1,5 @@
-;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
+;; -----------------------------------------------------------------
+;; GUI Customization
 
 ;; Enable mouse wheel scrolling
 (mouse-wheel-mode 1)
@@ -14,7 +14,7 @@
 (setq-default cursor-type '(bar . 1))
 
 ;; Don't blink
-(blink-cursor-mode 0)
+(blink-cursor-mode 1)
 
 ;; Visual instead of audio bells
 (setq visible-bell 1)
@@ -28,21 +28,41 @@
 (setq inhibit-startup-message t)
 (setq inhibit-startup-echo-area-message t)
 
+;; Use system font
+(setq font-use-system-font t)
+
+;; ---------------------------------------------------------------
+;; Text
+
 ;; Color Theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'tango t)
 
 ;; Auto indent
 (electric-indent-mode 1)
+(electric-pair-mode 1)
+(electric-layout-mode 1)
 
-;; Use system font
-(setq font-use-system-font t)
+;; Auto Complete
+(require 'auto-complete)
 
-;; ------------------------------------------------------------------
-;; Extensions
+;; Use spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
+;; ----------------------------------------------------------------
+;; External Script Sources
+
+;; Package Manager
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
 
 ;; User auload
 (add-to-list 'load-path "~/.emacs.d/auto-load")
+
+;; ------------------------------------------------------------------
+;; Extensions
 
 ;; web-mode
 (autoload 'web-mode "web-mode" "Major mode for editing web templates." t)
@@ -77,6 +97,11 @@
 (require 'sass-mode)
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
 
+;; Coffee Script Mode
+(autoload 'coffee-mode "coffee-mode" "Coffee Script Mode." t)
+(require 'coffee-mode)
+(add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+
 ;; jade-mode
 (require 'sws-mode)
 (require 'jade-mode)    
@@ -86,6 +111,10 @@
 ;; scala-mode
 (add-to-list 'load-path "~/.emacs.d/scala-mode2")
 (require 'scala-mode2)
+
+;; colojure-mode
+(require 'clojure-mode)
+(add-to-list 'auto-mode-alist '("\\.clj$" . clojure-mode))
 
 ;; ------------------------------------------------------------------------------
 ;; EMACS-Apps
