@@ -67,7 +67,7 @@ esac
 rvm use 1.9.3 > $HOME/.rvm/start.log
 
 # DevilsPie
-if pgrep gnome-session > /dev/null; then
+if pgrep cinnamon > /dev/null; then
     if ! pgrep devilspie >/dev/null; then 
         devilspie -a > $HOME/.devilspie/debug.log & # Run devils pie window hacker 
     fi
