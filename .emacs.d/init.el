@@ -31,11 +31,24 @@
 ;; Use system font
 (setq font-use-system-font t)
 
-;; ---------------------------------------------------------------
-;; Text
+;; ----------------------------------------------------------------
+;; External Script Sources
+
+;; Package Manager
+(require 'package)
+(add-to-list 'package-archives
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
+(package-initialize)
+
+;; User auload
+(add-to-list 'load-path "~/.emacs.d/auto-load")
 
 ;; Color Theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
+;; ---------------------------------------------------------------
+;; Text
+
 (load-theme 'tango t)
 
 ;; Auto indent
@@ -49,20 +62,12 @@
 ;; Use spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
-;; ----------------------------------------------------------------
-;; External Script Sources
-
-;; Package Manager
-(require 'package)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(package-initialize)
-
-;; User auload
-(add-to-list 'load-path "~/.emacs.d/auto-load")
-
 ;; ------------------------------------------------------------------
 ;; Extensions
+
+;; rainbow-mode
+;; Hilight them HTML colors
+(require 'rainbow-mode)
 
 ;; web-mode
 (autoload 'web-mode "web-mode" "Major mode for editing web templates." t)
