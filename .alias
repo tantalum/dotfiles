@@ -1,0 +1,8 @@
+alias ls="ls --color"
+alias la="ls -Al"
+alias grep="grep --color"
+alias grepr="grep -Rn"
+alias clr="clear"
+alias g="gvim"
+alias v="vim"
+alias colorize="pygmentize"
