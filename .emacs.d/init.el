@@ -114,8 +114,7 @@
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 
 ;; scala-mode
-(add-to-list 'load-path "~/.emacs.d/scala-mode2")
-(require 'scala-mode2)
+(require 'scala-mode)
 
 ;; colojure-mode
 (require 'clojure-mode)
