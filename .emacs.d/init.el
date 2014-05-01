@@ -37,11 +37,17 @@
               (add-to-list 'default-frame-alist '(width  . 80))))
 
 ;; Show line numbers
-(global-linum-mode t)
+(line-number-mode)
+(column-number-mode)
 
 ;; ----------------------------------------------------------------
 ;; Disable backup files
 (setq make-backup-files nil)
+
+;; ---------------------------------------------------------------
+;; Use spaces instead of tabs
+(setq indent-tabs-mode nil)
+
 
 ;; ----------------------------------------------------------------
 ;; External Script Sources
@@ -65,15 +71,20 @@
 
 ;; ---------------------------------------------------------------
 ;; Theme
-(load-theme 'wombat t)
+(load-theme 'monokai t)
 
 ;; --------------------------------------------------------------
 ;; Text Editing 
 
-;; auto insert
+;; electric modes
 (electric-pair-mode t)
 (electric-indent-mode t)
 (electric-layout-mode t)
+
+(defun disable-electric-indent-mode ()
+  (set (make-local-variable 'electric-indent-functions)
+       (list (lambda (arg) 'no-indent)))
+  )
 
 ;; Whitespace cleanup
 (global-whitespace-cleanup-mode)
@@ -84,16 +95,21 @@
 (require 'auto-complete)
 (global-auto-complete-mode t)
 
+;; Auto insert mode
+;; TODO: Setup
+(auto-insert-mode t)
+
 ;; Add coffee-mode to the list of auto complete modes
 (add-to-list 'ac-modes 'coffee-mode)
 
-;; Use spaces instead of tabs
-(setq-default indent-tabs-mode nil)
-
-;; Auto indent newlinews
-;;(define-key global-map (kbd "RET") 'newline-and-indent)
-
-(auto-insert-mode t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(coffee-tab-width 2)
+ '(flymake-coffee-coffeelint-configuration-file (expand-file-name "~/.emacs.d/coffeelint.json"))
+ )
 
 ;; =============================================================================
 ;; Extensions
@@ -121,19 +137,26 @@
 (autoload 'markdown-mode "markdown-mode" "Mode for editing Markdow files." t)
 (require 'markdown-mode)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+;; Enable spell check and long-ines-mode
+(dolist (hook '(markdown-mode-hook text-mode-hook))
+  (add-hook hook 'flyspell-mode)
+  (add-hook hook 'longlines-mode)
+  )
+
 
 ;; extra ruby hooks
 (autoload 'ruby-mode "ruby-mode" "Ruby Helpers." t)
 (require 'ruby-mode)
 (add-to-list 'auto-mode-alist '("\\.gemspec$" . ruby-mode))
+(add-to-list 'auto-mode-alist '("Rakefile$" . ruby-mode))
 
 ;; YAML mode
 (autoload 'yaml-mode "yaml-mode" "YAML editing mode." t)
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 (add-hook 'yaml-mode-hook
-          (lambda()
-            (electric-indent-mode t)))
+          'disable-electric-indent-mode)
+
 ;; Sass mode
 ;; Sass mode requires haml-mode
 (autoload 'haml-mode "haml-mode" "Major mode for editing HAML files." t)
@@ -141,7 +164,7 @@
 (add-to-list 'auto-mode-alist '("\\.haml$" . haml-mode))
 (add-hook 'haml-mode-hook
           (lambda()
-            (electric-indent-mode t)
+            (disable-electric-indent-mode)
             (rainbow-mode t)))
 
 (autoload 'sass-mode "sass-mode" "Sass major mode." t)
@@ -149,16 +172,17 @@
 (add-to-list 'auto-mode-alist '("\\.sass$" . sass-mode))
 (add-hook 'sass-mode-hook
           (lambda()
-            (electric-indent-mode t)
+            (disable-electric-indent-mode)
+            (auto-complete-mode t)
             (rainbow-mode t)))
 
 ;; Coffee Script Mode
 (autoload 'coffee-mode "coffee-mode" "Coffee Script Mode." t)
 (require 'coffee-mode)
 (add-to-list 'auto-mode-alist '("\\.coffee$" . coffee-mode))
+(add-hook 'coffee-mode-hook 'flymake-coffee-load)
 (add-hook 'coffee-mode-hook
-          (lambda()
-            (electric-indent-mode nil)))
+          'disable-electric-indent-mode)
 
 ;; jade-mode
 (require 'sws-mode)
@@ -166,9 +190,7 @@
 (add-to-list 'auto-mode-alist '("\\.styl$" . sws-mode))
 (add-to-list 'auto-mode-alist '("\\.jade$" . jade-mode))
 (add-hook 'jade-mode-hook
-          (lambda()
-            (electric-indent-mode nil)))
-
+          'disable-electric-indent-mode)
 ;; scala-mode
 (require 'scala-mode)
 
@@ -185,13 +207,15 @@
 (add-to-list 'auto-mode-alist '("\\.styl$" . stylus-mode))
 (add-hook 'stylus-mode-hook
           (lambda()
-            (electric-indent-mode t)
+            (disable-electric-indent-mode)
             (rainbow-mode t)))
 
+;; js-mode
 (setq js-indent-level 2)
-(add-hook 'js-mode-hook
-          (lambda()
-            (electric-indent-mode nil)))
+(add-hook 'js-mode-hook 'flymake-jshint-load)
+(add-hook 'js-mode-hook (lambda ()
+                          (imenu-add-menubar-index)
+                          (hs-minor-mode t)))
 ;; ------------------------------------------------------------------------------
 ;; EMACS-Apps
 
@@ -201,15 +225,8 @@
 (global-set-key "\C-cl" 'org-store-link)
 (setq org-agenda-files (list "~/.org/work.org"
                              "~/.org/personal.org"))
-;;-----------------------------------------------------------------------------
-;; SPELL CHECKING
-
-(dolist (hook '(markdown-mode-hook text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1)))
-  (add-hook hook (lambda () (long-lines-mode 1))))
-
 ;; -----------------------------------------------------------------------------
-;; HELPER FUNCTIONS CALLED VIA M-x
+;; HELPER FUNCTIONS
 
 (defun make-unix-file ()
   "Change the current file encodind utf-8-unix"
