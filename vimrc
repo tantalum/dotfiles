@@ -15,7 +15,7 @@ set smartcase
 set encoding=utf-8
 
 " Colorscheme
-colorscheme elflord
+colorscheme default
 
 " Show line numbers
 set number
