@@ -12,5 +12,7 @@ then
 fi
 export PATH
 
+export EDITOR="/usr/bin/vim"
+
 # Define our aliases
 source ~/.alias
