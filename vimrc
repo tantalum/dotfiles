@@ -1,4 +1,5 @@
 " filetypes
+syntax on
 filetype plugin on
 filetype indent on
 " ~/.vimrc ends here
