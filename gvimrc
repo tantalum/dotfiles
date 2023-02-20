@@ -5,7 +5,7 @@ set guioptions-=m
 set guioptions-=T
 
 " Colorscheme
-colorscheme default
+colorscheme onedark
 
 " Initial window size
-set lines=70 columns=120
+set lines=40 columns=120
