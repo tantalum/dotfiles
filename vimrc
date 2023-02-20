@@ -1,8 +1,19 @@
-" filetypes
-syntax on
-filetype plugin on
-filetype indent on
-" ~/.vimrc ends here
+call plug#begin('~/.vim/plugged')
+
+" Color Schemes
+Plug 'joshdick/onedark.vim'
+
+" Vim Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Fining Files
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Rainbow CSV
+Plug 'mechatroner/rainbow_csv'
+
+call plug#end()
 
 " My configuration
 set tabstop=4
@@ -12,6 +23,11 @@ set expandtab
 set ignorecase
 set smartcase
 
+" filetypes
+syntax on
+filetype plugin on
+filetype indent on
+
 " File encoding
 set encoding=utf-8
 
@@ -20,9 +36,6 @@ colorscheme default
 
 " Show line numbers
 set number
-
-" Key Mappings
-map <C-f> :NERDTreeToggle<CR>
 
 " Special file handeling
 au BufNewFile,BufRead *.md set filetype=markdown
