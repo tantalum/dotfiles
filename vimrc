@@ -22,6 +22,7 @@ set smartindent
 set expandtab
 set ignorecase
 set smartcase
+set nocompatible
 
 " filetypes
 syntax on
