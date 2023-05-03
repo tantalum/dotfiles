@@ -1,6 +1,8 @@
-alias ls="ls --color"
+if [[ $colors -eq "true" ]]; then
+    alias ls="ls --color"
+    alias grep="grep --color"
+fi
 alias la="ls -Al"
-alias grep="grep --color"
 alias grepr="grep -Rn"
 alias clr="clear"
 alias gvim="flatpak run org.vim.Vim"

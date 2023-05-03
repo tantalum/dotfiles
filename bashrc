@@ -5,6 +5,20 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+colors='false'
+
+case $TERM in 
+    *color*)
+        colors='true';;
+esac
+
+# Set color prompts
+if [[ $colors -eq "true" ]]; then
+    export PS1="[\e[0;36m\\u@\\h \e[0;35m\\W\e[m]\\$ "
+else
+    export PS1="[\\u@\\h \\W]\\$ "
+fi
+
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
 then
@@ -12,7 +26,7 @@ then
 fi
 export PATH
 
-export EDITOR="/usr/bin/vim"
-
 # Define our aliases
 source ~/.alias
+
+EDITOR="vim"
