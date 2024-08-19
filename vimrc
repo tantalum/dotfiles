@@ -13,6 +13,10 @@ Plug 'ctrlpvim/ctrlp.vim'
 " Rainbow CSV
 Plug 'mechatroner/rainbow_csv'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+Plug 'dense-analysis/ale'
+
 call plug#end()
 
 " My configuration
