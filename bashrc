@@ -13,11 +13,11 @@ case $TERM in
 esac
 
 # Set color prompts
-#if [[ $colors -eq "true" ]]; then
-#    export PS1="[\e[0;36m\\u@\\h \e[0;35m\\W\e[m]\\$ "
-#else
-#    export PS1="[\\u@\\h \\W]\\$ "
-#fi
+if [[ $colors -eq "true" ]]; then
+    export PS1="[\e[0;36m\\u@\\h \e[0;35m\\W\e[m]\\$ "
+else
+    export PS1="[\u@\h \W]\\$ "
+fi
 
 # User specific environment
 if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
@@ -38,4 +38,13 @@ then
     source ~/.env
 fi
 
-EDITOR="vim"
+# Git Prompt
+if [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]]
+then
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
+    if [[ $colors -eq "true" ]]; then
+        export PS1="[\e[0;36m\\u@\\h \e[0;35m\\W\e[m] \$(__git_ps1)\\$ "
+    else
+        export PS1="[\u@\h \W] \\$(__git_ps1)\\$ "
+    fi
+fi
