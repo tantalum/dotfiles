@@ -17,6 +17,13 @@ Plug 'mechatroner/rainbow_csv'
 Plug 'rust-lang/rust.vim'
 Plug 'dense-analysis/ale'
 
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+
+" Auto Completion
+" Plug 'Valloric/YouCompleteMe'
+
 call plug#end()
 
 " My configuration
@@ -37,10 +44,13 @@ filetype indent on
 set encoding=utf-8
 
 " Colorscheme
-colorscheme default
+colorscheme sorbet
 
 " Show line numbers
 set number
+
+" 4 lines under scorll
+set scrolloff=4
 
 " Special file handeling
 au BufNewFile,BufRead *.md set filetype=markdown
