@@ -19,7 +19,7 @@ reset=$(tput sgr0)
 
 # Set color prompts
 if [[ $colors -eq "true" ]]; then
-    export PS1="[\[$cyan\]\\u@\\h\[$reset\] \[$pink\]\\W\[$reset\]\\$ "
+    export PS1="[\[$cyan\]\\u@\\h\[$reset\] \[$pink\]\\W\[$reset\]]\\$ "
 else
     export PS1="[\u@\h \W]\\$ "
 fi
@@ -48,7 +48,7 @@ if [[ -f /usr/share/git-core/contrib/completion/git-prompt.sh ]]
 then
     source /usr/share/git-core/contrib/completion/git-prompt.sh
     if [[ $colors -eq "true" ]]; then
-        export PS1="[\[$cyan\]\\u@\\h\[$reset\] \[$pink\]\\W\[$reset\] \[$blue\]\$(__git_ps1)\[$reset\]\\$ "
+        export PS1="[\[$cyan\]\\u@\\h\[$reset\] \[$pink\]\\W\[$reset\]] \[$blue\]\$(__git_ps1)\[$reset\]\\$ "
     else
         export PS1="[\u@\h \W] \\$(__git_ps1)\\$ "
     fi
