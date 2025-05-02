@@ -44,7 +44,7 @@ filetype indent on
 set encoding=utf-8
 
 " Colorscheme
-colorscheme sorbet
+colorscheme onedark
 
 " Show line numbers
 set number
