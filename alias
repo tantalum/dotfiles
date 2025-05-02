@@ -2,13 +2,34 @@ if [[ $colors -eq "true" ]]; then
     alias ls="ls --color"
     alias grep="grep --color"
 fi
-alias ls="eza"
-alias vim="nvim"
-alias la="eza -Al"
+
+if command -v eza >/dev/null 2>&1; then
+    alias ls="eza"
+    alias la="eza -Al"
+else
+    alias la="ls -Al"
+fi
+
+if command -f bat >/dev/null 2>&1; then
+alias cat="bat"
+fi
+
+if command -v nvim >/dev/null 2>&1; then
+    alias vim="nvim"
+fi
+
+if command -v nvim-qt >/dev/null 2>&1; then
+    alias gvim="nvim-qt"
+    alias g="nvim-qt"
+elif command -v gvim >/dev/null 2>&1; then
+    alias g="gvim"
+fi
+
+if command -v pygmentize >/dev/null 2>&1; then
+    alias colorize="pygmentize"
+fi
+
+
 alias grepr="grep -Rn"
 alias clr="clear"
-alias gvim="nvim-qt"
-alias g="nvim-qt"
 alias v="vim"
-alias colorize="pygmentize"
-alias cat="bat"
