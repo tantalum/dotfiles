@@ -53,7 +53,17 @@ set number
 set scrolloff=4
 
 " Special file handeling
-au BufNewFile,BufRead *.md set filetype=markdown
-au BufNewFile,BufRead *.md set spell
-au BufNewFile,BufRead *.md set wrap
-au BufNewFile,BufRead *.md set linebreak
+au bufnewfile,bufread *.md set filetype=markdown
+au bufnewfile,bufread *.md set spell
+au bufnewfile,bufread *.md set wrap
+au bufnewfile,bufread *.md set linebreak
+
+au bufnewfile,bufread *.markdown set filetype=markdown
+au bufnewfile,bufread *.markdown set spell
+au bufnewfile,bufread *.markdown set wrap
+au bufnewfile,bufread *.markdown set linebreak
+
+au bufnewfile,bufread *.txt set filetype=markdown
+au bufnewfile,bufread *.txt set spell
+au bufnewfile,bufread *.txt set wrap
+au bufnewfile,bufread *.txt set linebreak
