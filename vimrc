@@ -44,7 +44,9 @@ filetype indent on
 set encoding=utf-8
 
 " Colorscheme
-colorscheme sorbet
+if !empty(getcompletion('sorbet', 'color'))
+    colorscheme sorbet
+endif
 
 " Show line numbers
 set number
