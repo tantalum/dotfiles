@@ -34,6 +34,7 @@ set expandtab
 set ignorecase
 set smartcase
 set nocompatible
+set cursorline
 
 " filetypes
 syntax on
